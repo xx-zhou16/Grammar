@@ -1,10 +1,9 @@
 DATA_DIR=/mnt/xiangxin/correction_model/preprocessed_data
 SAVE_DIR=/mnt/xiangxin2/checkpoints/leven_grammar_cn
 
-fairseq-train \
-    data-bin/wmt14_en_de_distill \
-    --save-dir checkpoints \
-    --ddp-backend=no_c10d \
+CUDA_VISIBLE_DEVICES=0 fairseq-train \
+    ${DATA_DIR} \
+    --save-dir ${SAVE_DIR} \
     --task translation_lev \
     --criterion nat_loss \
     --arch levenshtein_transformer \
@@ -17,9 +16,10 @@ fairseq-train \
     --dropout 0.3 --weight-decay 0.01 \
     --decoder-learned-pos \
     --encoder-learned-pos \
-    #--apply-bert-init \
     --log-format 'simple' --log-interval 100 \
     --fixed-validation-seed 7 \
     --max-tokens 8000 \
     --save-interval-updates 10000 \
     --max-update 300000
+    #--apply-bert-init \
+    #--ddp-backend=no_c10d \
