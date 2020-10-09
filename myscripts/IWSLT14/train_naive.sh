@@ -1,4 +1,5 @@
 DATA_DIR=/mnt/xiangxin2/data/iwslt14/preprocessed
+SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/naive
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 fairseq-train \
     ${DATA_DIR} \
