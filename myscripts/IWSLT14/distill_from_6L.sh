@@ -1,8 +1,8 @@
 exp_name=disitll_2L_from_6L
 DATA_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/naive/generated/preprocessed
-SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/${exp_name}
+SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/${exp_name}_v2
 
-CUDA_VISIBLE_DEVICES=2,3 fairseq-train \
+CUDA_VISIBLE_DEVICES=1,2,3 fairseq-train \
     ${DATA_DIR} \
     --arch transformer_iwslt_de_en --share-decoder-input-output-embed \
     --encoder-layers 2 --decoder-layers 2 \
