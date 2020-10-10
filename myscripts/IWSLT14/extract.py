@@ -21,7 +21,7 @@ def safe_index(toks, index, default):
 if not os.path.exists(args.tgt_dir):
 	os.mkdir(args.tgt_dir)
 
-with open(args.tgt_en, 'w') as tgt_en_file, open(args.tgt_de, 'w') as tgt_de_file:
+with open(args.tgt_en, 'w') as tgt_de_file, open(args.tgt_de, 'w') as tgt_en_file:
 	for line in tqdm(lines):
 		line = line.strip()
 		if line.startswith('S-'):
