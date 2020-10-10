@@ -1,4 +1,4 @@
-exp_name=naive_2L
+exp_name=naive_4L
 RESULT_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/${exp_name}/generated
 TARGET_ROOT=/mnt/xiangxin2/data/iwslt14/checkpoints/${exp_name}/generated/preprocessed
 ORIGIN_ROOT=/home/zxx2020/projects/fairseq/examples/translation/iwslt14.tokenized.de-en # raw data

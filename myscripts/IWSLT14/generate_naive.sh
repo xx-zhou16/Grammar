@@ -7,7 +7,7 @@ CUDA_VISIBLE_DEVICES=2,3 fairseq-generate ${DATA_DIR} \
     --batch-size 128 --beam 5 \
     --gen-subset train \
     --results-path ${RESULT_DIR}
-    
+
 # backup
 cp ${RESULT_DIR}/generate-train.txt ${RESULT_DIR}/generate-train.txt.bak
 
