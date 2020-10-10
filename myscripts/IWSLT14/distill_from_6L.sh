@@ -1,6 +1,6 @@
 exp_name=disitll_2L_from_6L
 DATA_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/naive/generated/preprocessed
-SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/${exp_name}_v2
+SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/${exp_name}
 
 CUDA_VISIBLE_DEVICES=1,2,3 fairseq-train \
     ${DATA_DIR} \
