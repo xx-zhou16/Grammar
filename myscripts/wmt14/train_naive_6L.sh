@@ -2,7 +2,7 @@ exp_name=naive_6L
 DATA_DIR=/mnt/xiangxin2/data/wmt14/preprocessed
 SAVE_DIR=/mnt/xiangxin2/data/wmt14/checkpoints/${exp_name}
 
-CUDA_VISIBLE_DEVICES=0,1,2,3  fairseq-train ${exp_name} \
+CUDA_VISIBLE_DEVICES=0,1,2,3  fairseq-train ${DATA_DIR} \
   --arch transformer_wmt_en_de --share-all-embeddings \
   --optimizer adam --adam-betas '(0.9, 0.98)' --clip-norm 0.0 \
   --lr-scheduler inverse_sqrt --warmup-init-lr 1e-07 --warmup-updates 4000 \
