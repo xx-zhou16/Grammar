@@ -13,5 +13,6 @@ DATA_DIR=/mnt/xiangxin2/data/wmt14/preprocessed
 fairseq-preprocess \
     --source-lang en --target-lang de \
     --trainpref $TEXT/train --validpref $TEXT/valid --testpref $TEXT/test \
+    --joined-dictionary \
     --destdir ${DATA_DIR} --thresholdtgt 0 --thresholdsrc 0 \
     --workers 20

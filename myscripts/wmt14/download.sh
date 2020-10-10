@@ -6,12 +6,12 @@ cd examples/translation/
 bash prepare-wmt14en2de.sh --icml17
 cd ../..
 
-# Binarize the dataset
-TEXT=examples/translation/wmt17_en_de
-DATA_DIR=/mnt/xiangxin2/data/wmt14/preprocessed
+## Binarize the dataset
+#TEXT=examples/translation/wmt17_en_de
+#DATA_DIR=/mnt/xiangxin2/data/wmt14/preprocessed
 
-fairseq-preprocess \
-    --source-lang en --target-lang de \
-    --trainpref $TEXT/train --validpref $TEXT/valid --testpref $TEXT/test \
-    --destdir ${DATA_DIR} --thresholdtgt 0 --thresholdsrc 0 \
-    --workers 20
+#fairseq-preprocess \
+#    --source-lang en --target-lang de \
+#    --trainpref $TEXT/train --validpref $TEXT/valid --testpref $TEXT/test \
+#    --destdir ${DATA_DIR} --thresholdtgt 0 --thresholdsrc 0 \
+#    --workers 20
