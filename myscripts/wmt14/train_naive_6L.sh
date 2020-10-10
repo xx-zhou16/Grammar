@@ -1,6 +1,6 @@
 exp_name=naive_6L
 DATA_DIR=/mnt/xiangxin2/data/wmt14/preprocessed
-SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/${exp_name}
+SAVE_DIR=/mnt/xiangxin2/data/wmt14/checkpoints/${exp_name}
 
 CUDA_VISIBLE_DEVICES=0,1,2,3  fairseq-train ${exp_name} \
   --arch transformer_wmt_en_de --share-all-embeddings \
