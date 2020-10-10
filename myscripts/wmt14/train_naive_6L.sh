@@ -9,7 +9,13 @@ CUDA_VISIBLE_DEVICES=0,1,2,3  fairseq-train ${DATA_DIR} \
   --lr 0.0007 --min-lr 1e-09 \
   --criterion label_smoothed_cross_entropy --label-smoothing 0.1 --weight-decay 0.0 \
   --max-tokens 4096 --save-dir ${SAVE_DIR} \
-  --update-freq 2
+  --update-freq 2 \
+  --tensorboard-logdir ${SAVE_DIR} \
+  --eval-bleu \
+  --eval-bleu-args '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}' \
+  --eval-bleu-detok moses \
+  --eval-bleu-remove-bpe \
+  --best-checkpoint-metric bleu --maximize-best-checkpoint-metric
 
 # --log-interval 50
 # --log-format json
