@@ -1,9 +1,10 @@
 DATA_DIR=/mnt/xiangxin2/data/iwslt14/preprocessed
-SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/naive
+SAVE_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/naive_4L
 
-CUDA_VISIBLE_DEVICES=0,1 fairseq-train \
+CUDA_VISIBLE_DEVICES=2 fairseq-train \
     ${DATA_DIR} \
     --arch transformer_iwslt_de_en --share-decoder-input-output-embed \
+    --encoder-layers 4 --decoder-layers 4 \
     --optimizer adam --adam-betas '(0.9, 0.98)' --clip-norm 0.0 \
     --lr 5e-4 --lr-scheduler inverse_sqrt --warmup-updates 4000 \
     --dropout 0.3 --weight-decay 0.0001 \

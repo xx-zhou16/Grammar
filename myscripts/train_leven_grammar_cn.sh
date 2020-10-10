@@ -1,7 +1,7 @@
 DATA_DIR=/mnt/xiangxin/correction_model/preprocessed_data
-SAVE_DIR=/mnt/xiangxin2/checkpoints/leven_grammar_cn
+SAVE_DIR=/mnt/xiangxin2/checkpoints/leven_grammar_cn_1GPU
 
-CUDA_VISIBLE_DEVICES=0 fairseq-train \
+CUDA_VISIBLE_DEVICES=0,1,2,3 fairseq-train \
     ${DATA_DIR} \
     --save-dir ${SAVE_DIR} \
     --task translation_lev \
