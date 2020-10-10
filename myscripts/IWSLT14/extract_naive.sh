@@ -1,6 +1,8 @@
 RESULT_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/naive/generated
-TARGET_ROOT=/mnt/xiangxin2/data/iwslt14/checkpoints/naive/generated/preprocessed
+TARGET_ROOT=/mnt/xiangxin2/data/iwslt14/checkpoints/naive/generated/raw
 ORIGIN_ROOT=/home/zxx2020/projects/fairseq/examples/translation/iwslt14.tokenized.de-en # raw data
+DEST_DIR=/mnt/xiangxin2/data/iwslt14/checkpoints/naive/generated/preprocessed
+mkdir -p ${DEST_DIR}
 
 python extract.py --src ${RESULT_DIR}/generate-train.txt --tgt ${TARGET_ROOT}
 cp ${ORIGIN_ROOT}/valid.en ${TARGET_ROOT}
@@ -17,5 +19,5 @@ fairseq-preprocess \
     --source-lang de --target-lang en \
     --trainpref ${TARGET_ROOT}/train --validpref ${TARGET_ROOT}/valid --testpref ${TARGET_ROOT}/test \
     --srcdict ${SRC_DICT} --tgtdict ${TGT_DICT} \
-    --destdir ${TARGET_ROOT} \
+    --destdir ${DEST_DIR} \
     --workers 20
