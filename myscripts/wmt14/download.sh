@@ -1,9 +1,9 @@
 # Download and prepare the data
 cd examples/translation/
 # WMT'17 data:
-bash prepare-wmt14en2de.sh
+# bash prepare-wmt14en2de.sh
 # or to use WMT'14 data:
-# bash prepare-wmt14en2de.sh --icml17
+bash prepare-wmt14en2de.sh --icml17
 cd ../..
 
 # Binarize the dataset
