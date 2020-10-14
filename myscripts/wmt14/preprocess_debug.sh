@@ -14,7 +14,7 @@ SRC_DICT=/mnt/xiangxin2/data/wmt14/preprocessed/dict.en.txt
 
 fairseq-preprocess \
     --source-lang en --target-lang de \
-    --validpref $TEXT/valid
+    --validpref $TEXT/valid \
     --joined-dictionary \
     --srcdict ${SRC_DICT} \
     --destdir ${DATA_DIR} --thresholdtgt 0 --thresholdsrc 0 \
