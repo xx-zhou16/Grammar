@@ -2,7 +2,7 @@ exp_name=distill_2L_from_6L
 DATA_DIR=/mnt/xiangxin2/data/wmt14/checkpoints/naive_6L/generated/preprocessed
 SAVE_DIR=/mnt/xiangxin2/data/wmt14/checkpoints/${exp_name}
 
-CUDA_VISIBLE_DEVICES=0  fairseq-train ${DATA_DIR} \
+CUDA_VISIBLE_DEVICES=0,1 fairseq-train ${DATA_DIR} \
   --arch transformer_wmt_en_de --share-all-embeddings \
   --encoder-layers 2 --decoder-layers 2 \
   --optimizer adam --adam-betas '(0.9, 0.98)' --clip-norm 0.0 \
