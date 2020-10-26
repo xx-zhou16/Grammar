@@ -21,6 +21,7 @@ from fairseq.modules import (
     AdaptiveSoftmax,
     FairseqDropout,
     LayerDropModuleList,
+    PartLayerDropModuleList,
     LayerNorm,
     PositionalEmbedding,
     SinusoidalPositionalEmbedding,
@@ -156,6 +157,8 @@ class TransformerModel(FairseqEncoderDecoderModel):
         parser.add_argument('--cross-self-attention', default=False, action='store_true',
                             help='perform cross+self-attention')
         # args for "Reducing Transformer Depth on Demand with Structured Dropout" (Fan et al., 2019)
+        parser.add_argument('--only-drop-topk', type=int, default=-1,
+                            help='only conduct LayerDrop on the top layers')
         parser.add_argument('--encoder-layerdrop', type=float, metavar='D', default=0,
                             help='LayerDrop probability for encoder')
         parser.add_argument('--decoder-layerdrop', type=float, metavar='D', default=0,
@@ -310,6 +313,7 @@ class TransformerEncoder(FairseqEncoder):
 
         self.dropout_module = FairseqDropout(args.dropout, module_name=self.__class__.__name__)
         self.encoder_layerdrop = args.encoder_layerdrop
+        self.only_drop_topk = args.only_drop_topk
 
         embed_dim = embed_tokens.embedding_dim
         self.padding_idx = embed_tokens.padding_idx
@@ -345,7 +349,12 @@ class TransformerEncoder(FairseqEncoder):
             self.quant_noise = None
 
         if self.encoder_layerdrop > 0.0:
-            self.layers = LayerDropModuleList(p=self.encoder_layerdrop)
+            if self.only_drop_topk > 0:
+                self.layers = PartLayerDropModuleList(p=self.encoder_layerdrop, 
+                        top_k=self.only_drop_topk,
+                        layer_num=args.encoder_layers)
+            else:
+                self.layers = LayerDropModuleList(p=self.encoder_layerdrop)
         else:
             self.layers = nn.ModuleList([])
         self.layers.extend(
@@ -533,6 +542,7 @@ class TransformerDecoder(FairseqIncrementalDecoder):
 
         self.dropout_module = FairseqDropout(args.dropout, module_name=self.__class__.__name__)
         self.decoder_layerdrop = args.decoder_layerdrop
+        self.only_drop_topk = args.only_drop_topk
         self.share_input_output_embed = args.share_decoder_input_output_embed
 
         input_embed_dim = embed_tokens.embedding_dim
@@ -581,7 +591,12 @@ class TransformerDecoder(FairseqIncrementalDecoder):
         self.cross_self_attention = getattr(args, "cross_self_attention", False)
 
         if self.decoder_layerdrop > 0.0:
-            self.layers = LayerDropModuleList(p=self.decoder_layerdrop)
+            if self.only_drop_topk > 0:
+                self.layers = PartLayerDropModuleList(p=self.decoder_layerdrop,
+                        top_k=self.only_drop_topk,
+                        layer_num=args.decoder_layers)
+            else:
+                self.layers = LayerDropModuleList(p=self.decoder_layerdrop)
         else:
             self.layers = nn.ModuleList([])
         self.layers.extend(
